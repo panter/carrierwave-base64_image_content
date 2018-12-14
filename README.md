@@ -1,8 +1,9 @@
-# Carrierwave::Base64ImageContent
+# CarrierWave::Base64ImageContent
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/carrierwave/base64_image_content`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This gem allows storing content with base64 images to a model with CarrierWave
+file uploads. The base64 images are extracted from the content and stored as
+physical files using CarrierWave's configured storage. When reading the content
+the files are converted back to base64 images.
 
 ## Installation
 
@@ -22,7 +23,51 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+The prerequisite for this gem is a model with an existing [multiple file
+uploads
+field](https://github.com/carrierwaveuploader/carrierwave#multiple-file-uploads).
+
+1. Include the module `CarrierWave::Base64ImageContent::Store`
+1. Call `base64_image_content_store` with the following two parameters:
+  * The model's content attribute, which is the actual database field that
+    stores the content
+  * The images attribute, which uses CarrierWave to store the files
+
+
+```ruby
+class Note < ActiveRecord::Base
+  include CarrierWave::Base64ImageContent::Store
+
+  mount_uploaders :images, ImageUploader
+
+  base64_image_content_store content: :text_content, images: :images
+end
+```
+
+### Example
+
+```ruby
+# Create a note containing a base64 image in the content
+Note.create!(
+  content: 'content1 <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQEASABKdhH//2Q=" />'
+)
+
+# The stored content has the base64 image replaced
+note.text_content
+# => content1 <img src="360593ff547c864bd9d16bbed6eb8860d9fad9a407aa74e066039db23b525338"  />
+
+# The note has one image...
+note.images.count
+# => 1
+
+# ... which corresponds to the original base64 image
+note.images.first.filename
+# => "360593ff547c864bd9d16bbed6eb8860d9fad9a407aa74e066039db23b525338.png"
+
+# Getting the content contains the base64 image again
+note.content
+# => "content1 <img src=\"data:image/png;base64,/9j/4AAQSkZJRgABAQEASABKdhH//2Q=\" />"
+```
 
 ## Development
 
