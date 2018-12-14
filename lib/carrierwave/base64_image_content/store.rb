@@ -9,9 +9,9 @@ module CarrierWave
         attr_reader :base64_image_content_content_attribute
         attr_reader :base64_image_content_images_attribute
 
-        def base64_image_content_store(content_attribute: :text_content, images_attribute: :images)
-          @base64_image_content_content_attribute = content_attribute
-          @base64_image_content_images_attribute = images_attribute
+        def base64_image_content_store(content: :text_content, images: :images)
+          @base64_image_content_content_attribute = content
+          @base64_image_content_images_attribute = images
         end
       end
 

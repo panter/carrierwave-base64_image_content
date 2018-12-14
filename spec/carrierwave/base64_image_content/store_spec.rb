@@ -11,7 +11,7 @@ RSpec.describe CarrierWave::Base64ImageContent::Store do
 
     mount_uploaders :images, ImageUploader
 
-    base64_image_content_store content_attribute: :text_content, images_attribute: :images
+    base64_image_content_store content: :text_content, images: :images
   end
 
   let(:image1_placeholder) do
