@@ -1,9 +1,7 @@
-RSpec.describe Carrierwave::Base64ImageContent do
-  it "has a version number" do
-    expect(Carrierwave::Base64ImageContent::VERSION).not_to be nil
-  end
+# frozen_string_literal: true
 
-  it "does something useful" do
-    expect(false).to eq(true)
+RSpec.describe CarrierWave::Base64ImageContent do
+  it 'has a version number' do
+    expect(CarrierWave::Base64ImageContent::VERSION).not_to be nil
   end
 end

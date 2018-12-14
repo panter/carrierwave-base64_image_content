@@ -4,7 +4,7 @@ require 'carrierwave/base64_image_content/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'carrierwave-base64_image_content'
-  spec.version       = Carrierwave::Base64ImageContent::VERSION
+  spec.version       = CarrierWave::Base64ImageContent::VERSION
   spec.authors       = ['Alexis Reigel']
   spec.email         = ['mail@koffeinfrei.org']
 
