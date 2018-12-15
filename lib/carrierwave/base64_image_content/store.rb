@@ -50,7 +50,7 @@ module CarrierWave
           (#{base64_file.filename_without_extension})
           (['"].*?>)
           /x,
-            "\\1#{base64_file.data_url}\\3"
+          "\\1#{base64_file.data_url}\\3"
         )
       end
 
@@ -69,18 +69,19 @@ module CarrierWave
       end
 
       def remove_obsolete_files!(new_image_files)
-        new_file_names = new_image_files.map(&:original_filename)
+        new_names = new_image_files.map(&:original_filename)
 
         read_images_attribute
-          .reject { |image| new_file_names.include?(image.file.original_filename) }
+          .reject { |image| new_names.include?(image.file.original_filename) }
           .each do |image|
-          read_images_attribute.delete(image)
-          image.remove!
-        end
+            read_images_attribute.delete(image)
+            image.remove!
+          end
       end
 
       def add_new_files!(new_image_files)
-        old_file_names = read_images_attribute.map(&:file).map(&:original_filename)
+        old_file_names =
+          read_images_attribute.map(&:file).map(&:original_filename)
 
         new_image_files
           .reject { |image| old_file_names.include?(image.original_filename) }
@@ -104,7 +105,7 @@ module CarrierWave
       def write_images_attribute(images)
         public_send(
           "#{self.class.base64_image_content_images_attribute}=",
-          images 
+          images
         )
       end
     end

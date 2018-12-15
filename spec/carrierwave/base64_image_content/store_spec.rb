@@ -26,11 +26,6 @@ RSpec.describe CarrierWave::Base64ImageContent::Store do
     'data:image/png;base64,/8c/4AAQSkZJRgABAQEASABKdhH//2Q='
   end
 
-  # subject(:note) do
-  #   Note.create!
-  # end
-
-
   describe '#content=' do
     context 'when content contains 1 image' do
       let(:note) do
@@ -94,7 +89,9 @@ RSpec.describe CarrierWave::Base64ImageContent::Store do
         content:
           %(content1 <img src="#{image1_placeholder}" />) +
           %(content2 <img src="#{image1_placeholder}" />),
-        images: [CarrierWave::Base64ImageContent::Base64StringIO.new(image1_data)]
+        images: [
+          CarrierWave::Base64ImageContent::Base64StringIO.new(image1_data)
+        ]
       )
 
       expect(note.content).to eq(
