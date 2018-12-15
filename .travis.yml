@@ -1,7 +1,18 @@
----
-sudo: false
 language: ruby
 cache: bundler
-rvm:
-  - 2.5.1
-before_install: gem install bundler -v 1.16.6
+sudo: false
+
+addons:
+  postgresql: '9.4'
+
+before_script:
+  - psql -c 'create database "carrierwave-base64_image_content_test";' -U postgres
+
+jobs:
+  include:
+    - stage: test
+      name: Rubocop
+      script: bundle exec rubocop -D
+    - stage: test
+      name: RSpec
+      script: bundle exec rspec spec
