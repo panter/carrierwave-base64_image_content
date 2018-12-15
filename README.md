@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/panter/carrierwave-base64_image_content.svg?branch=master)](https://travis-ci.org/panter/carrierwave-base64_image_content)
+[![Maintainability](https://api.codeclimate.com/v1/badges/3dbc2aeb57d7f3dd4cde/maintainability)](https://codeclimate.com/github/panter/carrierwave-base64_image_content/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/3dbc2aeb57d7f3dd4cde/test_coverage)](https://codeclimate.com/github/panter/carrierwave-base64_image_content/test_coverage)
+
 # CarrierWave::Base64ImageContent
 
 This gem allows storing content with base64 images to a model with CarrierWave
