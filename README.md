@@ -31,20 +31,20 @@ The prerequisite for this gem is a model with an existing [multiple file
 uploads
 field](https://github.com/carrierwaveuploader/carrierwave#multiple-file-uploads).
 
-1. Include the module `CarrierWave::Base64ImageContent::Store`
-1. Call `base64_image_content_store` with the following two parameters:
+1. Include the module `CarrierWave::Base64ImageContent`
+1. Call `base64_image_content` with the following two parameters:
   * The model's content attribute, which is the actual database field that
     stores the content
-  * The images attribute, which uses CarrierWave to store the files
+  * The model's images attribute, which uses CarrierWave to store the files
 
 
 ```ruby
 class Note < ActiveRecord::Base
-  include CarrierWave::Base64ImageContent::Store
+  include CarrierWave::Base64ImageContent
 
   mount_uploaders :images, ImageUploader
 
-  base64_image_content_store content: :text_content, images: :images
+  base64_image_content content: :text_content, images: :images
 end
 ```
 
